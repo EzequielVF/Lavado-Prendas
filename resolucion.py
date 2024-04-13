@@ -14,7 +14,7 @@ class Lavanderia:
 			self.prendas.append(Prenda(i+1))
    
 	def cargar_incompatibilidad(self, prenda, incompatibilidad):
-		self.prendas[prenda-1].cargar_incompatibilidad(incompatibilidad-1)
+		self.prendas[prenda-1].cargar_incompatibilidad(incompatibilidad)
 	
 	def cargar_tiempo(self, prenda, tiempo):
 		self.prendas[prenda-1].cargar_tiempo(tiempo)
@@ -25,7 +25,7 @@ class Lavanderia:
 		i = 0
 		lavado = 1
 		while(self.prendas_lavadas <= self.cantidad_prendas - 1):
-			if (self.prendas[i].prenda_lavada() == False) and (self.cola_incompatible(i+1) == False):
+			if (self.prendas[i].prenda_lavada() == False) and (self.cola_incompatible(self.prendas[i].nro) == False):
 				self.cola.append(self.prendas[i])
 			i = i + 1
 			if i == self.cantidad_prendas:
