@@ -1,0 +1,20 @@
+Bueno la primera impresión sencillo de entender y poco complejo donde debíamos poder lavar todas las
+prendas con la menor cantidad de lavados posibles y siendo lo más óptimo con el tiempo posible.
+
+De modo de no volverlo complejo en cuanto al Código lo encare desde el principio apoyándome en POO
+y trate de usar hashes donde sentía que era posible (las incompatibilidades de cada prenda)
+y de evitar el recorrido de arrays que para la cantidad actual de prendas es cosas de milisegundos
+pero que puede crecer bastante rápido si la cantidad de prendas creciese exponencialmente.
+
+Arranque primero sencillamente recorriendo el array de prendas el orden y incorporándolas al
+lavados si eran compatibles con el resto de las que ya estaban en ese lavado.
+El siguiente paso fue agregarle un ordenamiento de lo que es el array de prendas dejando a las que
+más tiempo tardarían primero, permitiendo aprovechar la lógica que los lavados tardan lo que tarda la
+prenda con el mayor tiempo.
+Y como optimización final, además de ordenar por tiempo en caso de igualdad, les di prioridad a los
+que tenían menos incompatibilidades permitiéndome sacarme de encima las prendas en lavados más "óptimos"
+o con más prendas diferentes.
+
+Me parece que la solución es bastante optima, pero me gustaría probarla con un problema más complejo,
+del estilo de 10k de prendas 150k restricciones para posteriormente compararla con una solución en CPLEX
+y ver áreas de mejora.
