@@ -1,0 +1,3 @@
+Bueno si bien el problema es el mismo, la dificultad aumenta respecto a la entrega anterior ya que voy
+a buscar alcanzar el puntaje top de este momento en el ranking(703).
+Para empezar voy a hacer una entrega con la solucion anteior para tener un punto de partida.

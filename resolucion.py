@@ -21,7 +21,7 @@ class Lavanderia:
  
 	def lavar(self):
 		self.prendas.sort()
-		archivo = open("respuestasTP1.txt","w")
+		archivo = open("respuestasTP2.txt","w")
 		i = 0
 		lavado = 1
 		while(self.prendas_lavadas <= self.cantidad_prendas - 1):
@@ -80,7 +80,7 @@ class Prenda:
 			return len(self.incompatibilidades) < len(other.incompatibilidades)
   
 def leer_archivo():
-	archivo = open("primer_problema.txt","r")
+	archivo = open("segundo_problema.txt","r")
 	linea = archivo.readline()
 	lavanderia = Lavanderia()
 	while(linea!= ""):
