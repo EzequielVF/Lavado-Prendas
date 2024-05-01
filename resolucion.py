@@ -14,7 +14,11 @@ class Lavanderia:
 			self.prendas.append(Prenda(i+1))
    
 	def cargar_incompatibilidad(self, prenda, incompatibilidad):
-		self.prendas[prenda-1].cargar_incompatibilidad(incompatibilidad)
+		if self.prendas[prenda-1].es_compatible_con(incompatibilidad):
+			self.prendas[prenda-1].cargar_incompatibilidad(incompatibilidad)
+		
+		if self.prendas[incompatibilidad-1].es_compatible_con(prenda):
+			self.prendas[incompatibilidad-1].cargar_incompatibilidad(prenda)
 	
 	def cargar_tiempo(self, prenda, tiempo):
 		self.prendas[prenda-1].cargar_tiempo(tiempo)
@@ -57,7 +61,7 @@ class Prenda:
 		self.lavada = False
   
 	def cargar_incompatibilidad(self, nro):
-		self.incompatibilidades.setdefault(nro, None)
+		self.incompatibilidades.setdefault(nro, None)		
   
 	def cargar_tiempo(self, nro):
 		self.tiempo = nro
