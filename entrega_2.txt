@@ -13,3 +13,5 @@ a por cual tiene menos incompatibilidades y en caso de empate por tiempo, a ver 
 ---------------------------------------------------------------------------------------------------------
 Entrega 2_3
 Bueno cambiar el metodo de ordenamiento fue contraproducente, pasamos de 520 a mas de 800.
+Pruebo agregar un nuevo parametro para ordenar donde me fijo de las prendas que son compatibles con esta
+cuantas tardan mas en lavarse y priorizo a las que tienen menos.
