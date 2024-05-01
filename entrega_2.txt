@@ -10,3 +10,6 @@ escalar de una forma optima. Esto me deja en la situacion de no saber o no tener
 mejorar mi solucion, voy a comenzar con algo facil que seria cambiar el criterio por el cual ordeno la cola
 de la cual tomo las prendas, cambioando el enfoque de tiempo y en caso de empate cual tiene menos imcompatibilidades
 a por cual tiene menos incompatibilidades y en caso de empate por tiempo, a ver si logro una mejora.
+---------------------------------------------------------------------------------------------------------
+Entrega 2_3
+Bueno cambiar el metodo de ordenamiento fue contraproducente, pasamos de 520 a mas de 800.

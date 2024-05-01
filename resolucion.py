@@ -7,7 +7,15 @@ class Lavanderia:
 		self.cola = []
 		self.cantidad_prendas = 0
 		self.prendas_lavadas = 0
-  
+	
+	def priorizacion(self):
+		tiempo_prenda = 0
+		for i in range(self.cantidad_prendas):
+			tiempo_prenda = self.prendas[i].tiempo_lavado()
+			for j in range(self.cantidad_prendas):
+				if self.prendas[j].te_lavas_en_menos_tiempo(tiempo_prenda) and (self.prendas[i].es_compatible_con(j+1)):
+					self.prendas[i].es_mas_pesada()
+    
 	def cargar_prendas(self, nro):
 		self.cantidad_prendas = nro
 		for i in range(nro):
@@ -59,6 +67,18 @@ class Prenda:
 		self.tiempo = 0
 		self.incompatibilidades = {}
 		self.lavada = False
+		self.prendas_mas_pesadas = 0
+	
+	def te_lavas_en_menos_tiempo(self, nro):
+		if self.tiempo < nro:
+			return True
+		return False
+  
+	def tiempo_lavado(self):
+		return self.tiempo
+ 
+	def es_mas_pesada(self):
+		self.prendas_mas_pesadas = self.prendas_mas_pesadas + 1
   
 	def cargar_incompatibilidad(self, nro):
 		self.incompatibilidades.setdefault(nro, None)		
@@ -78,10 +98,12 @@ class Prenda:
 		self.lavada = True
 
 	def __lt__(self, other):
+		if self.prendas_mas_pesadas != other.prendas_mas_pesadas:
+			return self.prendas_mas_pesadas < other.prendas_mas_pesadas
 		if self.tiempo != other.tiempo:
-			return len(self.incompatibilidades) < len(other.incompatibilidades)
-		else:
 			return self.tiempo > other.tiempo
+		else:
+			return len(self.incompatibilidades) < len(other.incompatibilidades)
   
 def leer_archivo():
 	archivo = open("segundo_problema.txt","r")
@@ -104,6 +126,7 @@ def leer_archivo():
 def main():
 	inicio = time.time()
 	lavanderia = leer_archivo()
+	lavanderia.priorizacion()	
 	lavanderia.lavar()
 	fin = time.time()
 	print(fin-inicio)
