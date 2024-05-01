@@ -1,3 +1,12 @@
+Entrega 2_1
 Bueno si bien el problema es el mismo, la dificultad aumenta respecto a la entrega anterior ya que voy
 a buscar alcanzar el puntaje top de este momento en el ranking(703).
 Para empezar voy a hacer una entrega con la solucion anteior para tener un punto de partida.
+---------------------------------------------------------------------------------------------------------
+Entrega 2_2
+La entrega anterior logro un resultado de 520, lo cual la verdad no esperaba, esperaba un resultado un 10%
+peor al 703 del ranking pero asumo que al aumentar las cantidades de prendas y restricciones esta no pudo
+escalar de una forma optima. Esto me deja en la situacion de no saber o no tener un estimado de cuanto podria
+mejorar mi solucion, voy a comenzar con algo facil que seria cambiar el criterio por el cual ordeno la cola
+de la cual tomo las prendas, cambioando el enfoque de tiempo y en caso de empate cual tiene menos imcompatibilidades
+a por cual tiene menos incompatibilidades y en caso de empate por tiempo, a ver si logro una mejora.
