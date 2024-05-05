@@ -68,10 +68,10 @@ class Prenda:
 		return True
 
 	def __lt__(self, other):
-		if len(self.incompatibilidades) != len(other.incompatibilidades):
-			return len(self.incompatibilidades) > len(other.incompatibilidades)
+		if self.tiempo != other.tiempo:
+			return self.tiempo > other.tiempo
 		else:
-			return self.tiempo > other.tiempo		
+			return len(self.incompatibilidades) < len(other.incompatibilidades)
   
 def leer_archivo():
 	archivo = open("segundo_problema.txt","r")
