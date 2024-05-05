@@ -18,3 +18,4 @@ cuantas tardan mas en lavarse y priorizo a las que tienen menos.
 ---------------------------------------------------------------------------------------------------------
 Entrega 2_4
 Los resultados de la anterior 588 y 609, segun como ordenaba ese nuevo valor que agregue, volvemos al escenario base.
+Pruebo implementar un pseudo-algoritmo de coloreo de grafos.
