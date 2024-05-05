@@ -20,3 +20,6 @@ Entrega 2_4
 Los resultados de la anterior 588 y 609, segun como ordenaba ese nuevo valor que agregue, volvemos al escenario base.
 Pruebo implementar un pseudo-algoritmo de coloreo de grafos.
 583 puntos, sigue siendo peor que la solucion original.
+---------------------------------------------------------------------------------------------------------
+Entrega 2_5
+Logro mejorar el 1° resultado, ordenando por tiempo descendente y incompatibilidades descendente en caso de empate.

@@ -71,7 +71,7 @@ class Prenda:
 		if self.tiempo != other.tiempo:
 			return self.tiempo > other.tiempo
 		else:
-			return len(self.incompatibilidades) < len(other.incompatibilidades)
+			return len(self.incompatibilidades) > len(other.incompatibilidades)
   
 def leer_archivo():
 	archivo = open("segundo_problema.txt","r")
