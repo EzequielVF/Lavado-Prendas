@@ -28,20 +28,40 @@ class Lavanderia:
 		archivo = open("respuestasTP2.txt","w")
 		i = 0
 		lavado = 1
-		while(self.prendas_lavadas <= self.cantidad_prendas - 1):
-			if (self.prendas[i].prenda_lavada() == False) and (self.cola_incompatible(self.prendas[i].nro) == False):
-				self.cola.append(self.prendas[i])
-			i = i + 1
-			if i == self.cantidad_prendas:
-				for j in self.cola:
-					j.lavar_prenda()
-					self.prendas_lavadas = self.prendas_lavadas + 1
-					archivo.write(str(j.nro) + " " + str(lavado) + "\n")
-				self.cola = []
-				lavado = lavado + 1
-				i = 0
+		colores = [-1] * self.cantidad_prendas
+		for i in range(self.cantidad_prendas):
+			if colores[i] == -1:
+				colores[i] =  lavado
+				self.prendas[i].lavado = lavado
+				for j in range(self.cantidad_prendas):
+					if colores[j] == -1 and self.prendas[i].es_compatible_con(self.prendas[j].nro) == True:
+						colores[j] =  lavado
+						self.prendas[j].lavado = lavado
+				lavado += 1
+
+		prendas_ordenadas = sorted(self.prendas, key=lambda x: x.lavado)
+		for prenda in prendas_ordenadas:
+			archivo.write(str(prenda.nro) + " " + str(prenda.lavado) + "\n")
+		#while(self.prendas_lavadas <= self.cantidad_prendas - 1):
+		#	if (self.prendas[i].prenda_lavada() == False) and (self.cola_incompatible(self.prendas[i].nro) == False):
+		#		self.cola.append(self.prendas[i])
+		#	i = i + 1
+		#	if i == self.cantidad_prendas:
+		#		for j in self.cola:
+		#			j.lavar_prenda()
+		#			self.prendas_lavadas = self.prendas_lavadas + 1
+		#			archivo.write(str(j.nro) + " " + str(lavado) + "\n")
+		#		self.cola = []
+		#		lavado = lavado + 1
+		#		i = 0
 		archivo.close()
-			
+	
+	def lavado_compatible(self, i, j):
+		for x in range(i):
+			if self.prendas[x].es_compatible_con(self.prendas[j].nro) == False:
+				return False
+		return True
+ 		
 	def cola_incompatible(self, nro):
 		if len(self.cola) == 0:
 			return False
@@ -59,7 +79,11 @@ class Prenda:
 		self.tiempo = 0
 		self.incompatibilidades = {}
 		self.lavada = False
-  
+		self.lavado = 0
+	
+	def devolver_lista_incomp(self):
+		return self.incompatibilidades
+ 
 	def cargar_incompatibilidad(self, nro):
 		self.incompatibilidades.setdefault(nro, None)		
   
@@ -67,6 +91,8 @@ class Prenda:
 		self.tiempo = nro
   
 	def es_compatible_con(self, nro):
+		if nro == self.nro:
+			return False
 		if nro in self.incompatibilidades:
 			return False
 		return True
@@ -78,10 +104,7 @@ class Prenda:
 		self.lavada = True
 
 	def __lt__(self, other):
-		if self.tiempo != other.tiempo:
-			return self.tiempo > other.tiempo
-		else:
-			return len(self.incompatibilidades) < len(other.incompatibilidades)
+		return len(self.incompatibilidades) > len(other.incompatibilidades)
   
 def leer_archivo():
 	archivo = open("segundo_problema.txt","r")
