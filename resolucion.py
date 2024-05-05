@@ -10,12 +10,12 @@ class Lavanderia:
 		for i in range(nro):
 			self.prendas.append(Prenda(i+1))
  
-	def cargar_incompatibilidad(self, prenda, incompatibilidad):
-		if self.prendas[prenda-1].es_compatible_con(incompatibilidad):
-			self.prendas[prenda-1].cargar_incompatibilidad(incompatibilidad)
+	def cargar_incompatibilidad(self, prenda, prenda2):
+		if self.prendas[prenda-1].es_compatible_con(prenda2):
+			self.prendas[prenda-1].cargar_incompatibilidad(prenda2)
 		
-		if self.prendas[incompatibilidad-1].es_compatible_con(prenda):
-			self.prendas[incompatibilidad-1].cargar_incompatibilidad(prenda)
+		if self.prendas[prenda2-1].es_compatible_con(prenda):
+			self.prendas[prenda2-1].cargar_incompatibilidad(prenda)
 	
 	def cargar_tiempo(self, prenda, tiempo):
 		self.prendas[prenda-1].cargar_tiempo(tiempo)
@@ -28,17 +28,14 @@ class Lavanderia:
 		for i in range(self.cantidad_prendas):
 			if colores[i] == -1:
 				colores[i] =  lavado
-				self.prendas[i].lavado = lavado
+				archivo.write(str(self.prendas[i].nro) + " " + str(lavado) + "\n")	
 				for j in range(self.cantidad_prendas):
 					if j == i:
 						continue
 					if colores[j] == -1 and self.lavado_compatible(j, lavado, colores):
 						colores[j] =  lavado
-						self.prendas[j].lavado = lavado
+						archivo.write(str(self.prendas[j].nro) + " " + str(lavado) + "\n")		
 				lavado += 1
-		prendas_ordenadas = sorted(self.prendas, key=lambda x: x.lavado)
-		for prenda in prendas_ordenadas:
-			archivo.write(str(prenda.nro) + " " + str(prenda.lavado) + "\n")
 		archivo.close()
 	
 	def lavado_compatible(self, j, lavado_actual, colores):
@@ -52,7 +49,6 @@ class Prenda:
 		self.nro = nro
 		self.tiempo = 0
 		self.incompatibilidades = {}
-		self.lavado = 0
  
 	def cargar_incompatibilidad(self, nro):
 		self.incompatibilidades.setdefault(nro, None)		
@@ -68,10 +64,10 @@ class Prenda:
 		return True
 
 	def __lt__(self, other):
-		if self.incompatibilidades != other.incompatibilidades:
-			return len(self.incompatibilidades) > len(other.incompatibilidades)		
-		else:
+		if self.tiempo != other.tiempo:
 			return self.tiempo > other.tiempo
+		else:
+			return len(self.incompatibilidades) >= len(other.incompatibilidades)
 			
   
 def leer_archivo():

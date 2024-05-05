@@ -23,3 +23,5 @@ Pruebo implementar un pseudo-algoritmo de coloreo de grafos.
 ---------------------------------------------------------------------------------------------------------
 Entrega 2_5
 Logro mejorar el 1° resultado, ordenando por tiempo descendente y incompatibilidades descendente en caso de empate.
+Probe un monton de otras varias, solo incompatibilidades, solo por tiempo, usar >= o <=, este fue la mejor combinacion
+que encontre, aprovecho para eliminar algunas partes del algoritmo para hacerlo mas performante.
