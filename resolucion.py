@@ -21,7 +21,7 @@ class Lavanderia:
 		self.prendas[prenda-1].cargar_tiempo(tiempo)
  
 	def lavar(self):
-		archivo = open("respuestasTP2.txt","w")
+		archivo = open("respuestasTP3.txt","w")
 		self.prendas.sort()
 		lavado = 1
 		colores = [-1] * self.cantidad_prendas
@@ -37,13 +37,21 @@ class Lavanderia:
 						archivo.write(str(self.prendas[j].nro) + " " + str(lavado) + "\n")		
 				lavado += 1
 		archivo.close()
+		return (lavado-1,colores)
 	
 	def lavado_compatible(self, j, lavado_actual, colores):
 		for x in range(j):
 			if self.prendas[x].es_compatible_con(self.prendas[j].nro) == False and colores[x] == lavado_actual:
 				return False
-		return True		
- 	
+		return True
+
+	def tiempo_lavado(self, colores, lavados):
+		tiempo_x_lavado = [0]*(lavados+1)
+		for x in range(self.cantidad_prendas):
+			if self.prendas[x].tiempo > tiempo_x_lavado[colores[x]]:
+				tiempo_x_lavado[colores[x]] = self.prendas[x].tiempo
+		return sum(tiempo_x_lavado)
+		
 class Prenda:
 	def __init__(self,nro):
 		self.nro = nro
@@ -71,7 +79,8 @@ class Prenda:
 			
   
 def leer_archivo():
-	archivo = open("segundo_problema.txt","r")
+	archivo = open("tercer_problema.txt","r")
+	#aux = open("inputtp2paracplex.txt","w") #Lineas usadas para generarme el archivo .dat para probar la solucion de CPLEX con el input del TP2
 	linea = archivo.readline()
 	lavanderia = Lavanderia()
 	while(linea!= ""):
@@ -83,16 +92,21 @@ def leer_archivo():
 			lavanderia.cargar_prendas(int(linea[2]))
 		elif(linea[0] == 'e'):
 			lavanderia.cargar_incompatibilidad(int(linea[1]), int(linea[2]))
+			#aux.write("<" + str(linea[1]) + "," + str(linea[2]) + ">," + "\n")
 		else:
 			lavanderia.cargar_tiempo(int(linea[1]), int(linea[2]))
+			#aux.write("<" + str(linea[1]) + "," + str(linea[2]) + ">," + "\n")
 		linea = archivo.readline()
 	return lavanderia
 
 def main():
 	inicio = time.time()
 	lavanderia = leer_archivo()
-	lavanderia.lavar()
+	resultado = lavanderia.lavar()
 	fin = time.time()
-	print(fin-inicio)
+	print("Se hicieron: " + str(resultado[0]) + " lavados.")
+	lavanderia.tiempo_lavado(resultado[1], resultado[0])	
+	print("El tiempo que tardo en lavar todo es: " + str(lavanderia.tiempo_lavado(resultado[1], resultado[0])))
+	print("El tiempo que tardo en correr el script es: " + str(fin-inicio) + " segs.")
  
 main()
