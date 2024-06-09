@@ -69,7 +69,7 @@ main {
 	  for ( k in opl.nodos ){
 	    if (opl.x[k][i] == 1)
 	    {
-	      writeln(i, " ", k);
+	      writeln(k, " ", i);
 	    }
 	  }
 /*
