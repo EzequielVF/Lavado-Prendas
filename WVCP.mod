@@ -62,14 +62,14 @@ main {
   opl.generate();
 
   if (cplex1.solve()) {
-    writeln("solution: ", cplex1.getObjValue(), " /size: ", dat.n, " /time: ",
-        cplex1.getCplexTime());
-        
-	for ( i in opl.nodos )
-	  for ( k in opl.colores ){
-	    if (opl.x[i][k] == 1)
+    //writeln("solution: ", cplex1.getObjValue(), " /size: ", dat.n, " /time: ",
+     //   cplex1.getCplexTime());
+       
+	for ( i in opl.colores )
+	  for ( k in opl.nodos ){
+	    if (opl.x[k][i] == 1)
 	    {
-	      writeln("Nodo ", i, ": ", k);
+	      writeln(i, " ", k);
 	    }
 	  }
 /*
